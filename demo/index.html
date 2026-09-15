@@ -222,5 +222,22 @@
 
   <div class="footer">LARR Demo · ICASSP 2027</div>
 </div>
+<script>
+  // Keep the initial page light while preparing audio just before it enters view.
+  (() => {
+    const players = document.querySelectorAll('audio[preload="none"]');
+    if (!('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const player = entry.target;
+        player.preload = 'metadata';
+        player.load();
+        observer.unobserve(player);
+      });
+    }, {rootMargin: '300px 0px'});
+    players.forEach(player => observer.observe(player));
+  })();
+</script>
 </body>
 </html>
