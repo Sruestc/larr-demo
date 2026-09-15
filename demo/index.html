@@ -14,7 +14,6 @@
   h3{font-size:17px;font-weight:700;margin:25px 0 7px;color:#222}
   p{margin:8px 0;color:#222;font-weight:500}.abstract{max-width:880px;margin:0 auto;text-align:justify}
   .note{color:#444;font-size:13px;margin:6px 0 15px;font-weight:550}
-  .paper-figure{margin:18px 0 28px;padding:14px 16px 12px;border:1px solid #c9c9c9;border-radius:5px;background:#fafafa}.paper-figure img{display:block;width:100%;height:auto}.paper-figure figcaption{margin-top:10px;color:#444;font-size:12px;line-height:1.5}
   table{width:100%;border-collapse:collapse;margin:12px 0 22px;font-size:14px}
   th{background:#e9e9e9;font-weight:750;text-align:left;border:1px solid #bdbdbd;padding:9px 10px;color:#111}
   td{border:1px solid #c9c9c9;padding:10px;vertical-align:middle;color:#202020;font-weight:500}
@@ -49,26 +48,7 @@
   <h2>Abstract</h2>
   <p class="abstract">Text-to-speech (TTS) reinforcement learning often uses utterance-level rewards from text ASR to improve pronunciation. Yet contextual ASR can mask a pronunciation error by exploiting linguistic context, hiding it from the transcript. In our experiments, contextual ASR detects only 19.6–31.3% of pronunciation errors. Moreover, such a reward cannot identify which acoustic tokens caused the error. This leaves TTS reinforcement learning without feedback that is both sensitive to phone errors and localized in time. We propose LM-Agnostic Recognition Reward (LARR) and a phone-level credit-assignment scheme to address these limitations. LARR uses phone-level recognition to reduce contextual masking of pronunciation errors, while dense LARR assigns credit to individual phones, thereby targeting individual pronunciation errors. We apply GRPO fine-tuning to a pre-trained LLM-based TTS model in both zero-shot and single-speaker SFT-to-RL settings. Experimental results show that the proposed method substantially improves both the intelligibility and naturalness of synthesized speech.</p>
 
-  <h2>1. Method Overview</h2>
-  <figure class="paper-figure">
-    <img src="assets/tts_advantage_diagram_editable_0910.png" alt="Conceptual comparison of scalar and dense LARR credit assignment">
-    <figcaption>Conceptual comparison of scalar and dense LARR credit assignment. Scalar credit broadcasts one group-normalized advantage to all tokens, while dense credit assigns phone-level advantages to the aligned acoustic-token spans.</figcaption>
-  </figure>
-
-<h2>2. Objective Results</h2>
-  <table>
-    <thead><tr><th>System</th><th>Mean CER/WER ↓</th><th>Mean PER ↓</th><th>Mean SIM ↑</th></tr></thead>
-    <tbody>
-      <tr><td>Original</td><td>4.116%</td><td>3.424%</td><td>76.204%</td></tr>
-      <tr><td>FireRedASR</td><td>3.313%</td><td>2.207%</td><td>76.030%</td></tr>
-      <tr><td>W3AR</td><td>4.046%</td><td>3.119%</td><td>76.389%</td></tr>
-      <tr><td>Scalar LARR</td><td>3.186%</td><td>1.687%</td><td>75.661%</td></tr>
-      <tr><td>Local LARR</td><td>3.430%</td><td>1.753%</td><td>75.860%</td></tr>
-      <tr><td><b>Dense LARR (ours)</b></td><td>3.273%</td><td><b>1.493%</b></td><td>75.980%</td></tr>
-    </tbody>
-  </table>
-
-<h2>3. ASR Repair Trap</h2>
+<h2>1. ASR Repair Trap</h2>
   <p>Each example contains an intentionally mispronounced utterance from the 2,000-utterance paired diagnostic set. The complete outputs are shown below; the injected pronunciation is highlighted in red and bold.</p>
   <table>
     <thead><tr><th>Type</th><th>Sample</th><th>Mispronounced audio</th><th>Full text ASR output<br><small>Qwen3-ASR-1.7B</small></th><th>Full phone output<br><small>ce_asr_beam</small></th></tr></thead>
@@ -81,7 +61,7 @@
   </table>
   <p class="caption">Phone sequences use the recognizer's token notation, including silence (<code>sil</code>) and pause markers (<code>L3</code>).</p>
 
-<h2>4. Zero-shot TTS Demo</h2>
+<h2>2. Zero-shot TTS Demo</h2>
   <p class="zero-shot-intro">Each example uses the same prompt and target text across six systems.</p>
   <div class="sample-card">
     <div class="sample-head"><span class="sample-number">Example 1</span><span class="sample-uid">10002754-00000006</span></div>
@@ -163,7 +143,7 @@
     </div>
   </div>
 
-<h2>5. SFT TTS Demo</h2>
+<h2>3. SFT TTS Demo</h2>
   <p class="zero-shot-intro">All three systems synthesize the same target sentence. Base is direct inference from the SFT model.</p>
   <div class="sample-card">
     <div class="sample-head"><span class="sample-number">Example 1</span><span class="sample-uid">cn-meta-00000309-00000039_A1</span></div>
