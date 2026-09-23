@@ -1,4 +1,4 @@
-# LARR Demo
+# LARR Demo and Reference Code
 
 **LARR: Language-Model-Attenuated Recognition Reward and Localized Credit Assignment for TTS Reinforcement Learning**
 
