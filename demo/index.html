@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LARR: Paper Demo</title>
+<title>LARR: Language-Model-Attenuated Recognition Reward and Localized Credit Assignment for TTS Reinforcement Learning</title>
 <style>
   body{margin:0;background:#fff;color:#151515;font:16px/1.65 Arial,"Noto Sans CJK SC","Microsoft YaHei",Helvetica,sans-serif;font-weight:500}
   .page{max-width:980px;margin:0 auto;padding:38px 24px 70px}
@@ -35,18 +35,59 @@
   .system-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
   .system-item{border:1px solid #d0d0d0;border-radius:3px;padding:9px 10px;background:#fafafa}.system-name{font-size:13px;font-weight:750;color:#222;margin-bottom:4px}.system-note{font-size:11px;color:#555;margin-bottom:5px}.system-item audio{width:100%;height:30px}
   .sft-placeholder{padding:13px 15px;border:1px dashed #aaa;background:#fafafa;color:#444}
+  .algorithm-intro{max-width:900px;margin-bottom:16px}
+  .algorithm-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0 18px}
+  .algorithm-step{position:relative;border:1px solid #c6d0d8;border-radius:5px;padding:13px 13px 12px;background:#f7fafc;min-height:132px}
+  .algorithm-step:not(:last-child)::after{content:'→';position:absolute;right:-16px;top:50%;transform:translateY(-50%);font-size:22px;color:#7893a6;font-weight:700;z-index:2}
+  .step-number{display:inline-flex;width:24px;height:24px;align-items:center;justify-content:center;border-radius:50%;background:#075e9f;color:#fff;font-size:12px;font-weight:750;margin-bottom:7px}
+  .step-title{font-size:14px;font-weight:750;color:#1d3b50;margin-bottom:4px}.step-text{font-size:12px;line-height:1.45;color:#3f4c55}
+  .algorithm-panel{border:1px solid #c6d0d8;border-radius:5px;background:#fbfcfd;padding:13px 15px 14px;margin:0 0 12px}
+  .algorithm-label{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#075e9f;font-weight:750;margin-bottom:7px}
+  pre.algorithm-code{margin:0;padding:12px 13px;background:#18232c;color:#edf4f8;border-radius:4px;overflow:auto;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;white-space:pre}
+  .algorithm-note{font-size:12px;color:#4c4c4c;margin:0}
+  .footer a{color:#075e9f;text-decoration:none}.footer a:hover{text-decoration:underline}
   .footer{border-top:1px solid #aaa;margin-top:45px;padding-top:15px;text-align:center;color:#555;font-size:12px;font-weight:550}
-  @media(max-width:700px){.page{padding:25px 13px 50px}h1{font-size:24px}.authors{font-size:13px}table{font-size:12px;display:block;overflow-x:auto;white-space:normal}audio{width:190px}.abstract{text-align:left}.system-grid{grid-template-columns:1fr}.prompt-line{align-items:flex-start;flex-direction:column}.prompt-line audio{width:100%}}
+  @media(max-width:850px){.algorithm-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.algorithm-step:nth-child(2)::after{display:none}.algorithm-step:nth-child(3)::after{display:none}}
+  @media(max-width:700px){.page{padding:25px 13px 50px}h1{font-size:24px}.authors{font-size:13px}table{font-size:12px;display:block;overflow-x:auto;white-space:normal}audio{width:190px}.abstract{text-align:left}.system-grid{grid-template-columns:1fr}.prompt-line{align-items:flex-start;flex-direction:column}.prompt-line audio{width:100%}.algorithm-flow{grid-template-columns:1fr}.algorithm-step::after{display:none!important}pre.algorithm-code{font-size:11px}}
 </style>
 </head>
 <body>
 <div class="page">
-  <h1>LARR: LM-Agnostic Recognition Reward and Hypothesis-Aware Credit Assignment for TTS Reinforcement Learning</h1>
-  <p class="authors">Rui Song<sup>1</sup>, Yajun Hu<sup>2</sup>, Lei Sun<sup>2</sup>, Xin Fang<sup>2</sup>, Jianqing Gao<sup>2</sup>, Zhen-Hua Ling<sup>1</sup></p>
+  <h1>LARR: Language-Model-Attenuated Recognition Reward<br>and Localized Credit Assignment<br>for TTS Reinforcement Learning</h1>
+  <p class="authors">Rui Song<sup>1</sup>, Yajun Hu<sup>2</sup>, Chang Liu<sup>2</sup>, Lei Sun<sup>2</sup>, Xin Fang<sup>2</sup>, Jianqing Gao<sup>2</sup>, Guoping Hu<sup>2</sup></p>
   <p class="affil"><sup>1</sup>University of Science and Technology of China &nbsp;&nbsp; <sup>2</sup>iFLYTEK Research</p>
 
   <h2>Abstract</h2>
-  <p class="abstract">Text-to-speech (TTS) reinforcement learning often uses utterance-level rewards from text ASR to improve pronunciation. Yet contextual ASR can mask a pronunciation error by exploiting linguistic context, hiding it from the transcript. In our experiments, contextual ASR detects only 19.6–31.3% of pronunciation errors. Moreover, such a reward cannot identify which acoustic tokens caused the error. This leaves TTS reinforcement learning without feedback that is both sensitive to phone errors and localized in time. We propose LM-Agnostic Recognition Reward (LARR) and a phone-level credit-assignment scheme to address these limitations. LARR uses phone-level recognition to reduce contextual masking of pronunciation errors, while dense LARR assigns credit to individual phones, thereby targeting individual pronunciation errors. We apply GRPO fine-tuning to a pre-trained LLM-based TTS model in both zero-shot and single-speaker SFT-to-RL settings. Experimental results show that the proposed method substantially improves both the intelligibility and naturalness of synthesized speech.</p>
+  <p class="abstract">Text-to-speech (TTS) reinforcement learning often uses utterance-level rewards from text ASR to improve pronunciation. Yet contextual ASR can mask a pronunciation error by exploiting linguistic context, hiding it from the transcript. In our experiments, contextual ASR detects only 19.6–31.3% of pronunciation errors. Moreover, such a reward cannot identify which acoustic tokens caused the error. This leaves TTS reinforcement learning without feedback that is both sensitive to phone errors and localized in time. We propose Language-Model-Attenuated Recognition Reward (LARR) and a phone-level credit-assignment scheme to address these limitations. LARR uses a phone recognizer trained with history-token replacement to reduce contextual repair, while dense LARR assigns credit to individual phones, thereby targeting individual pronunciation errors. We apply GRPO fine-tuning to a pre-trained LLM-based TTS model in both zero-shot and single-speaker SFT-to-RL settings. Experimental results show that the proposed method substantially improves both the intelligibility and naturalness of synthesized speech.</p>
+
+<h2>Dense LARR: Phone-Aligned Credit Assignment</h2>
+  <p class="algorithm-intro">This compact view highlights how Dense LARR moves recognition feedback from a phone position to the corresponding TTS token span. The frame-level phone logits used for span mapping may come from either a frame-level phoneme recognizer or a CTC phoneme recognizer; the logits are assumed to be available. Architecture details and training hyperparameters are omitted.</p>
+  <div class="algorithm-flow">
+    <div class="algorithm-step"><div class="step-number">1</div><div class="step-title">Phone hypothesis</div><div class="step-text">Recognize phones from each rollout waveform.</div></div>
+    <div class="algorithm-step"><div class="step-number">2</div><div class="step-title">Error labels</div><div class="step-text">Align the hypothesis with the reference and mark affected target phones.</div></div>
+    <div class="algorithm-step"><div class="step-number">3</div><div class="step-title">Span mapping</div><div class="step-text">Use constrained monotonic phone spans from the frame-level logits, then transfer them through the edit path to TTS policy-token spans.</div></div>
+    <div class="algorithm-step"><div class="step-number">4</div><div class="step-title">Dense credit</div><div class="step-text">Normalize phone-position labels across same-prompt rollouts and apply them to mapped spans.</div></div>
+  </div>
+  <div class="algorithm-panel">
+    <div class="algorithm-label">Compact pseudocode</div>
+    <pre class="algorithm-code"><code>for each rollout i:
+    H_i ← phone_recognizer(acoustic_codes(W_i))
+    E_i ← levenshtein_backtrace(H_i, G_i)
+    q_i,m ← −1 if E_i marks m (substitution/deletion;
+             insertion marks its adjacent target phone(s))
+             +1 otherwise
+
+    S_i^H ← constrained_phone_spans(phone_logits_i, phone_order=H_i)
+    S_i^G ← transfer_hypothesis_spans(S_i^H, E_i)
+    φ_i ← map_ctc_steps_to_policy_tokens(S_i^G, policy_token_positions_i)
+
+for each target-phone position m in the same-prompt group:
+    a_i,m ← standardize_across_rollouts({q_j,m})
+    A_i,t ← mask_i,t · a_i,m  if φ_i(t) = m, else 0
+
+if phone/edit/token alignment fails: fall back to scalar GRPO</code></pre>
+  </div>
+  <p class="algorithm-note">The key distinction is span-level localization: tokens outside an aligned phone span receive no dense phone credit. The alignment interface is agnostic to whether the logits come from a frame-level or CTC phone recognizer.</p>
 
 <h2>1. ASR Repair Trap</h2>
   <p>Each example contains an intentionally mispronounced utterance from the 2,000-utterance paired diagnostic set. The complete outputs are shown below; the injected pronunciation is highlighted in red and bold.</p>
@@ -200,7 +241,7 @@
     </div>
   </div>
 
-  <div class="footer">LARR Demo · ICASSP 2027</div>
+  <div class="footer">LARR Demo · ICASSP 2027 · <a href="https://github.com/Sruestc/larr-demo" target="_blank" rel="noopener">GitHub repository</a></div>
 </div>
 </body>
 </html>

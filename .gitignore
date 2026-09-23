@@ -1,0 +1,18 @@
+# LaTeX build artifacts
+.tex-build/
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.spl
+
+# Compiled output (regenerate with compile.sh)
+main.pdf
+
+# Downloaded reference papers: large binaries, not part of the draft
+analysis/references_20260909/*.pdf
