@@ -13,6 +13,7 @@
   h2{font-size:23px;font-weight:750;border-bottom:2px solid #8e8e8e;padding-bottom:7px;margin:38px 0 12px;color:#111}
   h3{font-size:17px;font-weight:700;margin:25px 0 7px;color:#222}
   p{margin:8px 0;color:#222;font-weight:500}.abstract{max-width:880px;margin:0 auto;text-align:justify}
+  .top-links{text-align:center;font-size:13px;margin:10px 0 28px;font-weight:650}.top-links a{color:#075e9f;text-decoration:none}.top-links a:hover{text-decoration:underline}
   .note{color:#444;font-size:13px;margin:6px 0 15px;font-weight:550}
   table{width:100%;border-collapse:collapse;margin:12px 0 22px;font-size:14px}
   th{background:#e9e9e9;font-weight:750;text-align:left;border:1px solid #bdbdbd;padding:9px 10px;color:#111}
@@ -56,6 +57,7 @@
   <h1>LARR: Language-Model-Attenuated Recognition Reward<br>and Localized Credit Assignment<br>for TTS Reinforcement Learning</h1>
   <p class="authors">Rui Song<sup>1</sup>, Yajun Hu<sup>2</sup>, Chang Liu<sup>2</sup>, Lei Sun<sup>2</sup>, Xin Fang<sup>2</sup>, Jianqing Gao<sup>2</sup>, Guoping Hu<sup>2</sup></p>
   <p class="affil"><sup>1</sup>University of Science and Technology of China &nbsp;&nbsp; <sup>2</sup>iFLYTEK Research</p>
+  <p class="top-links"><a href="https://github.com/Sruestc/larr-demo/tree/master/larr_credit" target="_blank" rel="noopener">Reference code</a> &nbsp;·&nbsp; <a href="https://github.com/Sruestc/larr-demo" target="_blank" rel="noopener">GitHub repository</a></p>
 
   <h2>Abstract</h2>
   <p class="abstract">Text-to-speech (TTS) reinforcement learning often uses utterance-level rewards from text ASR to improve pronunciation. Yet contextual ASR can mask a pronunciation error by exploiting linguistic context, hiding it from the transcript. In our experiments, contextual ASR detects only 19.6–31.3% of pronunciation errors. Moreover, such a reward cannot identify which acoustic tokens caused the error. This leaves TTS reinforcement learning without feedback that is both sensitive to phone errors and localized in time. We propose Language-Model-Attenuated Recognition Reward (LARR) and a phone-level credit-assignment scheme to address these limitations. LARR uses a phone recognizer trained with history-token replacement to reduce contextual repair, while dense LARR assigns credit to individual phones, thereby targeting individual pronunciation errors. We apply GRPO fine-tuning to a pre-trained LLM-based TTS model in both zero-shot and single-speaker SFT-to-RL settings. Experimental results show that the proposed method substantially improves both the intelligibility and naturalness of synthesized speech.</p>
@@ -241,7 +243,7 @@ if phone/edit/token alignment fails: fall back to scalar GRPO</code></pre>
     </div>
   </div>
 
-  <div class="footer">LARR Demo · ICASSP 2027 · <a href="https://github.com/Sruestc/larr-demo" target="_blank" rel="noopener">GitHub repository</a> · <a href="https://github.com/Sruestc/larr-demo/tree/master/larr_credit" target="_blank" rel="noopener">Reference code</a></div>
+  <div class="footer">LARR Demo · ICASSP 2027</div>
 </div>
 </body>
 </html>
